@@ -2,8 +2,14 @@ import { Entity } from "./Entity";
 import { rotateTo, distance } from "../libraries/utils";
 
 export class Player extends Entity {
+  /**
+   * @param {Object} config - standard phaser 3 config
+   * @param {Phaser.Scene} config.scene - scene that has this object 
+   * @param {number} config.x - x coordinate on the scene
+   * @param {number} config.y - y coordinate on the scene
+   */
   constructor(config) {
-    super({...config, texture: "player"});
+    super({ ...config, texture: "player" });
     this.rotateToPointer();
 
     this.speed = 2500;
@@ -39,7 +45,7 @@ export class Player extends Entity {
       dist = this.maxPointerDistance;
     }
     let speed = this.speed / this.maxPointerDistance * (dist - 50);
-    if(speed <= 0) {
+    if (speed <= 0) {
       speed = 0;
     }
     return speed;
