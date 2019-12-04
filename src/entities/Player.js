@@ -1,21 +1,19 @@
+import { Entity } from "./Entity";
 import { rotateTo, distance } from "../libraries/utils";
 
-export class Player extends Phaser.GameObjects.Sprite {
+export class Player extends Entity {
   constructor(config) {
-    super(config.scene, config.x, config.y, 'player');
-    config.scene.add.existing(this);
-    config.scene.physics.add.existing(this);
-
+    super({...config, texture: "player"});
     this.rotateToPointer();
 
     this.speed = 2500;
     this.body.maxSpeed = 500;
     this.maxPointerDistance = 300;
     this.body.useDamping = true;
-    this.body.setDrag(0.97);
+    this.body.setDrag(0.97); // gives somewhat natural 'feeling' to the ship *imo*
   }
 
-  update() {
+  update(time, delta) {
     this.moveToPointer();
   }
 
