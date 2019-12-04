@@ -1,11 +1,17 @@
 import 'phaser';
 
-import { SimpleScene } from './scenes/simple-scene';
+import { DemoScene } from './scenes/demoScene';
 
 const gameConfig = {
   width: window.innerWidth * window.devicePixelRatio,
   height: window.innerHeight * window.devicePixelRatio,
-  scene: SimpleScene
+  scene: DemoScene,
+  physics: {
+    default: 'arcade',
+    arcade: {
+      debug: true
+    }
+  }
 };
 
 const game = new Phaser.Game(gameConfig);
