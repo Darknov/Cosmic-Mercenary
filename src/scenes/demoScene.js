@@ -8,9 +8,8 @@ const gameObjects = [];
 
 export class DemoScene extends Phaser.Scene {
   preload() {
-    this.load.image('background', '../../assets/backgrounds/blue.png');
-    this.load.image('player', '../../assets/ships/playerShip1_blue.png');
-    this.physics.accelerateToObject
+    this.load.image('background', 'assets/backgrounds/blue.png');
+    this.load.image('player', 'assets/ships/playerShip1_blue.png');
   }
 
   create() {
