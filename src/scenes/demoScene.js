@@ -1,11 +1,16 @@
 import { Player } from "../entities/Player";
- 
+import { addLoadingBar } from "./loadingBar";
 
-const width = 3000;
-const height = 3000;
-
+const width = 10000;
+const height = 10000;
+const PATH_TO_ASSETS = "assets/";
 export class DemoScene extends Phaser.Scene {
+  constructor(config) {
+    super({ ...config, key: 'DemoScene' });
+  }
+
   preload() {
+    addLoadingBar(this);
     this.load.image('background', 'assets/backgrounds/blue.png');
     this.load.image('player', 'assets/ships/playerShip1_blue.png');
   }
@@ -15,7 +20,7 @@ export class DemoScene extends Phaser.Scene {
 
     this.background = this.add.tileSprite(0, 0, width, height, 'background');
     populate.call(this);
-    this.cameras.main.setBounds(-width/2, -height/2, width, height);
+    this.cameras.main.setBounds(-width / 2, -height / 2, width, height);
   }
 
   update(time, delta) {
@@ -26,6 +31,6 @@ export class DemoScene extends Phaser.Scene {
 }
 
 function populate() {
-  this.player = new Player({ scene: this, x: 0, y: 0});
+  this.player = new Player({ scene: this, x: 0, y: 0 });
   this.cameras.main.startFollow(this.player);
 }

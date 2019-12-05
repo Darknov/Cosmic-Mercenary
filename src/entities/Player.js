@@ -3,6 +3,7 @@ import { rotateTo, distance } from "../libraries/utils";
 
 export class Player extends Entity {
   /**
+   * Creates player entity
    * @param {Object} config - standard phaser 3 config
    * @param {Phaser.Scene} config.scene - scene that has this object 
    * @param {number} config.x - x coordinate on the scene

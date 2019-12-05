@@ -1,5 +1,6 @@
 export class Entity extends Phaser.GameObjects.Sprite {
   /**
+   * Creates entity(object) on the scene
    * @param {Object} config - standard phaser 3 config
    * @param {Phaser.Scene} config.scene - scene that has this object 
    * @param {number} config.x - x coordinate on the scene
