@@ -1,4 +1,4 @@
-export class Entity extends Phaser.GameObjects.Sprite {
+export class Entity extends Phaser.GameObjects.Container {
   /**
    * Creates entity(object) on the scene
    * @param {Object} config - standard phaser 3 config
@@ -8,7 +8,7 @@ export class Entity extends Phaser.GameObjects.Sprite {
    * @param {String} config.texture - name of the texture used for rendering this object
    */
   constructor(config) {
-    super(config.scene, config.x, config.y, config.texture);
+    super(config.scene, config.x, config.y, []);
     config.scene.add.existing(this);
     config.scene.physics.add.existing(this);
     this.scene.gameObjects.push(this);

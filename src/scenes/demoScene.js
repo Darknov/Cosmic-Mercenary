@@ -20,6 +20,15 @@ export class DemoScene extends Phaser.Scene {
     this.load.image('el6', 'assets/backgrounds/elements/l4_satellite01-01.png');
     this.load.image('el1', 'assets/backgrounds/elements/l6_satellite02-01.png');
     this.load.image('el7', 'assets/backgrounds/elements/l1_nebula-01.png');
+    
+    this.load.image('exhaust1', 'assets/ships/exhaustBlue/Ship3_flight_001.png');
+    this.load.image('exhaust2', 'assets/ships/exhaustBlue/Ship3_flight_002.png');
+    this.load.image('exhaust3', 'assets/ships/exhaustBlue/Ship3_flight_003.png');
+    this.load.image('exhaust4', 'assets/ships/exhaustBlue/Ship3_flight_004.png');
+    this.load.image('exhaust5', 'assets/ships/exhaustBlue/Ship3_turbo_001.png');
+    this.load.image('exhaust6', 'assets/ships/exhaustBlue/Ship3_turbo_002.png');
+    this.load.image('exhaust7', 'assets/ships/exhaustBlue/Ship3_turbo_003.png');
+    this.load.image('exhaust8', 'assets/ships/exhaustBlue/Ship3_turbo_004.png');
   }
 
   create() {

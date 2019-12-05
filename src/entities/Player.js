@@ -10,9 +10,10 @@ export class Player extends Entity {
    * @param {number} config.y - y coordinate on the scene
    */
   constructor(config) {
-    super({ ...config, texture: "player" });
+    super({ ...config });
+    
+    this.add(this.scene.add.image(0,0, 'player'));
     this.rotateToPointer();
-
     this.speed = 2500;
     this.body.maxSpeed = 500;
     this.maxPointerDistance = 300;
