@@ -11,18 +11,16 @@ export class Player extends Entity {
    */
   constructor(config) {
     super({ ...config });
-    
-    this.add(this.scene.add.image(0,0, 'player'));
+    this.buildContainerComponents();
+    this.setProperties();
     this.rotateToPointer();
-    this.speed = 2500;
-    this.body.maxSpeed = 500;
-    this.maxPointerDistance = 300;
-    this.body.useDamping = true;
-    this.body.setDrag(0.97); // gives somewhat natural 'feeling' to the ship *imo*
+
+
   }
 
   update(time, delta) {
     this.moveToPointer();
+    // this.updateExhaust();
   }
 
   rotateToPointer() {
@@ -33,6 +31,49 @@ export class Player extends Entity {
         y: this.y - camera.scrollY * this.scrollFactorY
       }, 90);
     }, this);
+  }
+
+  buildContainerComponents() {
+    this.ship = this.scene.add.sprite(0, 0, 'player');
+
+    this.exhaust = this.scene.add.sprite(3, 56, 'exhaust1');
+    this.exhaust.setScale(2);
+    this.exhaust.setAngle(-90);
+    this.scene.anims.create({
+      key: 'exhaust',
+      frames: [
+        { key: 'exhaust1' },
+        { key: 'exhaust2' },
+        { key: 'exhaust3' },
+        { key: 'exhaust4' }
+      ],
+      frameRate: 10,
+      repeat: -1
+    });
+
+    this.scene.anims.create({
+      key: 'turbo',
+      frames: [
+        { key: 'exhaust5' },
+        { key: 'exhaust6' },
+        { key: 'exhaust7' },
+        { key: 'exhaust8' }
+      ],
+      frameRate: 10,
+      repeat: -1
+    });
+
+    this.exhaust.play('exhaust');
+
+    this.add([this.ship, this.exhaust]);
+  }
+
+  setProperties() {
+    this.speed = 2500;
+    this.body.maxSpeed = 500;
+    this.maxPointerDistance = 300;
+    this.body.useDamping = true;
+    this.body.setDrag(0.97); // gives somewhat natural 'feeling' to the ship *imo*
   }
 
   getSpeed(pointer) {
@@ -61,7 +102,16 @@ export class Player extends Entity {
         x: pointer.x + camera.scrollX * this.scrollFactorX,
         y: pointer.y + camera.scrollY * this.scrollFactorY
       }, this.getSpeed(pointer));
+  }
 
+  //todo
+  updateExhaust() {
+    if(this.body.speed <= this.body.maxSpeed/2) {
+      this.exhaust.play('exhaust');
+      // this.exhaust.x = 0;
+    } else {
+      this.exhaust.play('turbo');
+    }
   }
 }
 

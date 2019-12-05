@@ -60,7 +60,7 @@ function setBackground() {
   nebula.setDisplaySize(width, height);
   nebula.width = width;
   nebula.height = height;
-  for(let i = 0; i < 10; i++) {
+  for(let i = 0; i < 15; i++) {
     const el = this.add.image(getRandomInt( -width/2, width/2), getRandomInt( -width/2, width/2), 'el' + getRandomInt(1,7))
     el.setAngle(getRandomInt(0,180));
     el.scale = Math.random();
