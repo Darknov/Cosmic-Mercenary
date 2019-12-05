@@ -74,6 +74,9 @@ export class Player extends Entity {
     this.maxPointerDistance = 300;
     this.body.useDamping = true;
     this.body.setDrag(0.97); // gives somewhat natural 'feeling' to the ship *imo*
+    this.body.setOffset(-35,-35);
+    this.body.setCircle(35);
+
   }
 
   getSpeed(pointer) {
