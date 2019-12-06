@@ -40,7 +40,7 @@ function populate() {
 // background tests, looks byatiful
 function setBackground() {
   this.background = this.add.tileSprite(0, 0, width, height, 'background');
-  const nebula = this.add.image(0,0, 'el7');
+  const nebula = this.add.image(0,0, 'el' + getRandomInt(7,11));
   
   nebula.setDisplaySize(width, height);
   nebula.width = width;

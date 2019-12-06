@@ -14,8 +14,6 @@ export class Player extends Entity {
     this.buildContainerComponents();
     this.setProperties();
     this.rotateToPointer();
-
-
   }
 
   update(time, delta) {

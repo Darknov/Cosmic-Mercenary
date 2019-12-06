@@ -8,5 +8,3 @@ export const exhaust = [
   ['exhaust7', 'assets/ships/exhaustBlue/Ship3_turbo_003.png'],
   ['exhaust8', 'assets/ships/exhaustBlue/Ship3_turbo_004.png'],
 ];
-
-let exhaustNumber = 0;
