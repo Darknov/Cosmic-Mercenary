@@ -5,7 +5,7 @@ export class Entity extends Phaser.GameObjects.Container {
    * @param {Phaser.Scene} config.scene - scene that has this object 
    * @param {number} config.x - x coordinate on the scene
    * @param {number} config.y - y coordinate on the scene
-   * @param {String} config.texture - name of the texture used for rendering this object
+   * @param {Array} config.children - name of the texture used for rendering this object
    */
   constructor(config) {
     super(config.scene, config.x, config.y, []);

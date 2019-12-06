@@ -33,7 +33,9 @@ export class DemoScene extends Phaser.Scene {
 }
 
 function populate() {
-  this.player = new Player({ scene: this, x: 0, y: 0 });
+  this.player = new Player({ scene: this, x: 0, y: 0});
+
+
   this.cameras.main.startFollow(this.player);
 }
 

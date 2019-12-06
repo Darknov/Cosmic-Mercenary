@@ -9,6 +9,6 @@ class GenericEnemy extends Entity {
    * @param {number} config.y - y coordinate on the scene
    */
   constructor(config) {
-
+    super(config);
   }
 }

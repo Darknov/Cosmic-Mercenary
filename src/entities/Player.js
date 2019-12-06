@@ -1,5 +1,6 @@
 import { Entity } from "./Entity";
 import { rotateTo, distance } from "../libraries/utils";
+import { Shot } from "../entities/Shot";
 
 export class Player extends Entity {
   /**
@@ -10,10 +11,25 @@ export class Player extends Entity {
    * @param {number} config.y - y coordinate on the scene
    */
   constructor(config) {
-    super({ ...config });
+    super(config);
     this.buildContainerComponents();
     this.setProperties();
     this.rotateToPointer();
+    this.scene.input.on('pointerdown', (pointer) => {
+      const shot = new Shot({scene: this.scene, x: this.x, y: this.y},{
+        image: 'shot1_asset',
+        speed: 1000,
+        angle: this.angle - 90,
+        animationIn: [
+        'shot1_1',
+        'shot1_2',
+        'shot1_3',
+        'shot1_4'
+        ]
+      });
+
+    },this)
+    
   }
 
   update(time, delta) {
