@@ -3,7 +3,7 @@ import { getRandomInt } from "../libraries/utils";
 const planetarySystems = new Map();
 
 /**
- * Gets unique code for every planetary system
+ * Returns unique code for every planetary system
  */
 const getUniqueCode = () => {
   let code = 0;
@@ -16,7 +16,7 @@ const getUniqueCode = () => {
 
 export class GenericPlanetarySystem {
   /**
-   * Create a Planetary System(to be used in near future)
+   * Creates a Planetary System(to be used in near future)
    * @param {String} name - Name that is displayed in the game
    * @param {Array} spaceObjects - array of objects that should be updated and rendered in this planetary system
    */

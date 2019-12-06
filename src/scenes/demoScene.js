@@ -1,6 +1,8 @@
 import { Player } from "../entities/Player";
 import { addLoadingBar } from "./loadingBar";
 import { getRandomInt } from "../libraries/utils"
+import { demoSceneAssets } from "./sceneAssets/demoSceneAssets";
+import { loadAssets } from "./sceneAssets/loadAssets";
 
 const width = 3000;
 const height = 3000;
@@ -11,24 +13,7 @@ export class DemoScene extends Phaser.Scene {
 
   preload() {
     addLoadingBar(this);
-    this.load.image('background', 'assets/backgrounds/l2_stars-01.png');
-    this.load.image('player', 'assets/ships/playerShip1_blue.png');
-    this.load.image('el2', 'assets/backgrounds/elements/l3_planet-01.png');
-    this.load.image('el3', 'assets/backgrounds/elements/l3_planet02-01.png');
-    this.load.image('el4', 'assets/backgrounds/elements/l3_sun-01.png');
-    this.load.image('el5', 'assets/backgrounds/elements/l4_planet02-01.png');
-    this.load.image('el6', 'assets/backgrounds/elements/l4_satellite01-01.png');
-    this.load.image('el1', 'assets/backgrounds/elements/l6_satellite02-01.png');
-    this.load.image('el7', 'assets/backgrounds/elements/l1_nebula-01.png');
-    
-    this.load.image('exhaust1', 'assets/ships/exhaustBlue/Ship3_flight_001.png');
-    this.load.image('exhaust2', 'assets/ships/exhaustBlue/Ship3_flight_002.png');
-    this.load.image('exhaust3', 'assets/ships/exhaustBlue/Ship3_flight_003.png');
-    this.load.image('exhaust4', 'assets/ships/exhaustBlue/Ship3_flight_004.png');
-    this.load.image('exhaust5', 'assets/ships/exhaustBlue/Ship3_turbo_001.png');
-    this.load.image('exhaust6', 'assets/ships/exhaustBlue/Ship3_turbo_002.png');
-    this.load.image('exhaust7', 'assets/ships/exhaustBlue/Ship3_turbo_003.png');
-    this.load.image('exhaust8', 'assets/ships/exhaustBlue/Ship3_turbo_004.png');
+    loadAssets(this, demoSceneAssets);
   }
 
   create() {
