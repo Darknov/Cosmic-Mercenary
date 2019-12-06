@@ -1,0 +1,6 @@
+﻿# A simple bash code to get path to the assets in the folder
+
+for entry in "."/*/*
+do
+  echo "$entry" | cut -c2-
+done
