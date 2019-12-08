@@ -1,4 +1,4 @@
-import { exhaust } from "./assetPacks/exhaustBlue";
+import { exhaust } from "./assetPacks/exhaust1";
 import { backgroundElements } from "./assetPacks/backgroundElements"
 import { ships } from "./assetPacks/ships"
 import { backgrounds } from "./assetPacks/backgrounds"

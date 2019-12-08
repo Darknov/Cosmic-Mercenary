@@ -16,18 +16,7 @@ export class Player extends Entity {
     this.setProperties();
     this.rotateToPointer();
     this.scene.input.on('pointerdown', (pointer) => {
-      const shot = new Shot({scene: this.scene, x: this.x, y: this.y},{
-        image: 'shot1_asset',
-        speed: 1000,
-        angle: this.angle - 90,
-        animationIn: [
-        'shot1_1',
-        'shot1_2',
-        'shot1_3',
-        'shot1_4'
-        ]
-      });
-
+      this.shot(pointer);
     },this)
     
   }
@@ -50,16 +39,27 @@ export class Player extends Entity {
   buildContainerComponents() {
     this.ship = this.scene.add.sprite(0, 0, 'player');
 
-    this.exhaust = this.scene.add.sprite(3, 56, 'exhaust1');
-    this.exhaust.setScale(2);
-    this.exhaust.setAngle(-90);
+    this.guns = [];
+    this.guns.push(this.scene.add.sprite(-36, 20, 'shot1_asset'));
+    this.guns.push(this.scene.add.sprite(40, 20, 'shot1_asset'));
+    this.guns[0].setAngle(-90);
+    this.guns[1].setAngle(-90);
+
+    this.exhaust = this.scene.add.sprite(-1, 77, 'exhaust1');
+    this.exhaust.setScale(0.15);
     this.scene.anims.create({
       key: 'exhaust',
       frames: [
         { key: 'exhaust1' },
         { key: 'exhaust2' },
         { key: 'exhaust3' },
-        { key: 'exhaust4' }
+        { key: 'exhaust4' },
+        { key: 'exhaust5' },
+        { key: 'exhaust6' },
+        { key: 'exhaust7' },
+        { key: 'exhaust8' },
+        { key: 'exhaust9' },
+        { key: 'exhaust10' },
       ],
       frameRate: 10,
       repeat: -1
@@ -79,7 +79,7 @@ export class Player extends Entity {
 
     this.exhaust.play('exhaust');
 
-    this.add([this.ship, this.exhaust]);
+    this.add([...this.guns, this.ship, this.exhaust, ]);
   }
 
   setProperties() {
@@ -129,6 +129,26 @@ export class Player extends Entity {
     } else {
       this.exhaust.play('turbo');
     }
+  }
+
+  shot(pointer) {
+    for (const gun of this.guns) {
+
+      const shot = new Shot({scene: this.scene, x: gun.x + this.x, y: gun.y + this.y},{
+        image: 'shot1_asset',
+        speed: 1000,
+        angle: this.angle - 90,
+        animationIn: [
+        'shot1_1',
+        'shot1_2',
+        'shot1_3',
+        'shot1_4'
+        ]
+      });
+      console.log(gun.body);
+    }
+
+
   }
 }
 
