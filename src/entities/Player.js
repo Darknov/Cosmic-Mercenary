@@ -17,13 +17,25 @@ export class Player extends Entity {
     this.rotateToPointer();
     this.scene.input.on('pointerdown', (pointer) => {
       this.shot(pointer);
-    },this)
-    
+    }, this)
+
+    this.droneCircle = new Phaser.Geom.Circle(this.x, this.y, 150);
+
+    this.drones = [];
+    this.drones.push(this.scene.add.sprite(this.x, this.y, 'robot'));
+    this.drones.push(this.scene.add.sprite(this.x, this.y, 'robot'));
+    this.drones.push(this.scene.add.sprite(this.x, this.y, 'robot'));
+    // this.drones.push(this.scene.add.sprite(this.x, this.y, 'robot'));
+    // this.drones.push(this.scene.add.sprite(this.x, this.y, 'robot'));
   }
 
   update(time, delta) {
     this.moveToPointer();
-    // this.updateExhaust();
+    this.updateDrones(time, delta);
+    Phaser.Geom.Circle.CircumferencePoint(new Phaser.Geom.Circle(this.x, this.y, 150), time/1000, this.drones[0]);
+    Phaser.Geom.Circle.CircumferencePoint(new Phaser.Geom.Circle(this.x, this.y, 150), time/1000 + 2.1, this.drones[1]);
+    Phaser.Geom.Circle.CircumferencePoint(new Phaser.Geom.Circle(this.x, this.y, 150), time/1000 + 4.20, this.drones[2]);
+
   }
 
   rotateToPointer() {
@@ -79,7 +91,7 @@ export class Player extends Entity {
 
     this.exhaust.play('exhaust');
 
-    this.add([...this.guns, this.ship, this.exhaust, ]);
+    this.add([...this.guns, this.ship, this.exhaust,]);
   }
 
   setProperties() {
@@ -88,7 +100,7 @@ export class Player extends Entity {
     this.maxPointerDistance = 300;
     this.body.useDamping = true;
     this.body.setDrag(0.97); // gives somewhat natural 'feeling' to the ship *imo*
-    this.body.setOffset(-35,-35);
+    this.body.setOffset(-35, -35);
     this.body.setCircle(35);
 
   }
@@ -121,33 +133,26 @@ export class Player extends Entity {
       }, this.getSpeed(pointer));
   }
 
-  //todo
-  updateExhaust() {
-    if(this.body.speed <= this.body.maxSpeed/2) {
-      this.exhaust.play('exhaust');
-      // this.exhaust.x = 0;
-    } else {
-      this.exhaust.play('turbo');
-    }
-  }
-
+  // temporary, need to fix real coordinates
   shot(pointer) {
+    console.log(this.droneCircle);
     for (const gun of this.guns) {
 
-      const shot = new Shot({scene: this.scene, x: gun.x + this.x, y: gun.y + this.y},{
+      const shot = new Shot({ scene: this.scene, x: gun.x + this.x, y: gun.y + this.y }, {
         image: 'shot1_asset',
         speed: 1000,
         angle: this.angle - 90,
         animationIn: [
-        'shot1_1',
-        'shot1_2',
-        'shot1_3',
-        'shot1_4'
+          'shot1_1',
+          'shot1_2',
+          'shot1_3',
+          'shot1_4'
         ]
       });
-      console.log(gun.body);
     }
+  }
 
+  updateDrones(time, delta) {
 
   }
 }
