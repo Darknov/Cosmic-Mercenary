@@ -137,7 +137,7 @@ export class Player extends Entity {
     for (const gun of this.guns) {
       const shot = new Shot({ scene: this.scene, x: gun.body.center.x, y: gun.body.center.y }, {
         image: 'Shot3_asset',
-        speed: 1400,
+        speed: 20,
         angle: this.angle - 90,
         animationIn: [
           'Shot3_1',
@@ -162,7 +162,7 @@ export class Player extends Entity {
     this.drones.iterate((child) => {
       const shot = new Shot({ scene: this.scene, x: child.body.center.x, y: child.body.center.y }, {
         image: 'shot2_asset',
-        speed: 700,
+        speed: 20,
         angle: this.angle - 90,
         animationIn: [
           'shot2_1',

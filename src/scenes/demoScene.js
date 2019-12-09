@@ -17,39 +17,37 @@ export class DemoScene extends Phaser.Scene {
   }
 
   create() {
-    this.physics.world.setBounds(-width / 2, -height / 2, width, height);
     this.gameObjects = this.add.group({
-      runChildUpdate: true,
+      runChildUpdate: true
     });
-
-    setBackground.call(this);
-
-    populate.call(this);
+    this.physics.world.setBounds(-width / 2, -height / 2, width, height);
     this.cameras.main.setBounds(-width / 2, -height / 2, width, height);
+
+    setBackground(this);
+    populate(this);
+    
   }
 
   update(time, delta) {
-
+    
   }
 }
 
-function populate() {
-  this.player = new Player({ scene: this, x: 0, y: 0});
-
-
-  this.cameras.main.startFollow(this.player);
+const populate = (scene) => {
+  scene.player = new Player({ scene: scene, x: 0, y: 0});
+  scene.cameras.main.startFollow(scene.player);
 }
 
 // background tests, looks byatiful
-function setBackground() {
-  this.background = this.add.tileSprite(0, 0, width, height, 'background');
-  const nebula = this.add.image(0,0, 'el' + getRandomInt(7,11));
+const setBackground = (scene) => {
+  scene.background = scene.add.tileSprite(0, 0, width, height, 'background');
+  const nebula = scene.add.image(0,0, 'el' + getRandomInt(7,11));
   
   nebula.setDisplaySize(width, height);
   nebula.width = width;
   nebula.height = height;
   for(let i = 0; i < 15; i++) {
-    const el = this.add.image(getRandomInt( -width/2, width/2), getRandomInt( -width/2, width/2), 'el' + getRandomInt(1,7))
+    const el = scene.add.image(getRandomInt( -width/2, width/2), getRandomInt( -width/2, width/2), 'el' + getRandomInt(1,7))
     el.setAngle(getRandomInt(0,180));
     el.scale = Math.random();
   }

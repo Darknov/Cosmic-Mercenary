@@ -7,6 +7,7 @@ export class Shot extends Entity {
     this.setProperties({ ...config, ...shotConfig });
     this.buildContainerComponents({ ...shotConfig });
     this.image = shotConfig.image;
+    this.isDestroyable = false;
   }
 
   setProperties({ x, y, angle = 0, speed = 0 }) {
@@ -50,7 +51,6 @@ export class Shot extends Entity {
         repeat: 0
       }).on('complete', (currentAnim, currentFrame, sprite) => {
         sprite.destroy();
-        this.destroy();
       });
     }
 
@@ -63,9 +63,13 @@ export class Shot extends Entity {
     this.existedFor += delta;
     if (this.existedFor > 3000) {
       this.existedFor = 0;
-      this.iterate(shot => {
-        shot.play(`${this.image}_animationOut`)
+      this.each(shot => {
+        shot.play(`${this.image}_animationOut`);
       });
+    }
+
+    if(this.list.length === 0) {
+      this.OnDestroy();
     }
   }
 }

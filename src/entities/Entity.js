@@ -13,4 +13,8 @@ export class Entity extends Phaser.GameObjects.Container {
     config.scene.physics.add.existing(this);
     this.scene.gameObjects.add(this);
   }
+
+  OnDestroy() {
+    this.destroy();
+  }
 }
