@@ -25,4 +25,12 @@ export class GenericEnemy extends Entity {
 
     this.add([this.ship]);
   }
+
+  update(time, delta) {
+    this.AI();
+  }
+
+  AI() {
+    this.scene.physics.accelerateToObject(this, this.scene.player, 800);
+  }
 }
