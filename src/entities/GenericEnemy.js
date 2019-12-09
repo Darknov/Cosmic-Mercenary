@@ -1,6 +1,6 @@
 import { Entity } from "./Entity";
 
-class GenericEnemy extends Entity {
+export class GenericEnemy extends Entity {
   /**
    * Creates hostile entity
    * @param {Object} config - standard phaser 3 config
@@ -10,5 +10,19 @@ class GenericEnemy extends Entity {
    */
   constructor(config) {
     super(config);
+    this.setProperties();
+    this.buildContainerComponents();
+  }
+
+  setProperties() {
+
+  }
+
+  buildContainerComponents() {
+    this.ship = this.scene.add.sprite(0, 0, 'enemy1');
+    this.ship.setScale(0.15);
+
+
+    this.add([this.ship]);
   }
 }

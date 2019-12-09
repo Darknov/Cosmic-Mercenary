@@ -1,4 +1,5 @@
 import { Player } from "../entities/Player";
+import { GenericEnemy } from "../entities/GenericEnemy";
 import { addLoadingBar } from "./loadingBar";
 import { getRandomInt } from "../libraries/utils"
 import { demoSceneAssets } from "./sceneAssets/demoSceneAssets";
@@ -25,7 +26,6 @@ export class DemoScene extends Phaser.Scene {
 
     setBackground(this);
     populate(this);
-    
   }
 
   update(time, delta) {
@@ -35,6 +35,7 @@ export class DemoScene extends Phaser.Scene {
 
 const populate = (scene) => {
   scene.player = new Player({ scene: scene, x: 0, y: 0});
+  new GenericEnemy({ scene: scene, x: 100, y: 100});
   scene.cameras.main.startFollow(scene.player);
 }
 

@@ -12,8 +12,8 @@ export class Player extends Entity {
    */
   constructor(config) {
     super(config);
-    this.buildContainerComponents();
     this.setProperties();
+    this.buildContainerComponents();
     this.rotateToPointer();
     this.scene.input.on('pointerdown', (pointer) => {
       this.shot(pointer);
