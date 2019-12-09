@@ -48,8 +48,8 @@ export class Player extends Entity {
   }
 
   buildContainerComponents() {
+    
     this.ship = this.scene.add.sprite(0, 0, 'player');
-
     this.guns = [];
     this.guns.push(this.scene.physics.add.sprite(-36, 20, 'shot1_asset'));
     this.guns.push(this.scene.physics.add.sprite(40, 20, 'shot1_asset'));
