@@ -21,20 +21,19 @@ export class Player extends Entity {
 
     this.droneCircle = new Phaser.Geom.Circle(this.x, this.y, 150);
 
-    this.drones = [];
-    this.drones.push(this.scene.add.sprite(this.x, this.y, 'robot'));
-    this.drones.push(this.scene.add.sprite(this.x, this.y, 'robot'));
-    this.drones.push(this.scene.add.sprite(this.x, this.y, 'robot'));
-    // this.drones.push(this.scene.add.sprite(this.x, this.y, 'robot'));
-    // this.drones.push(this.scene.add.sprite(this.x, this.y, 'robot'));
+    this.drones = new Phaser.GameObjects.Container(this.scene, this.x, this.y);
+    this.scene.add.existing(this.drones);
+    this.scene.physics.add.existing(this.drones);
+    this.drones.add(this.scene.physics.add.sprite(150, 150, 'robot').setAngle(135));
+    this.drones.add(this.scene.physics.add.sprite(-150, 150, 'robot').setAngle(-135));
+    this.drones.add(this.scene.physics.add.sprite(150, -150, 'robot').setAngle(45));
+    this.drones.add(this.scene.physics.add.sprite(-150, -150, 'robot').setAngle(-45));
+    // Phaser.Actions.PlaceOnCircle(this.drones, this.droneCircle);
   }
 
   update(time, delta) {
     this.moveToPointer();
     this.updateDrones(time, delta);
-    Phaser.Geom.Circle.CircumferencePoint(new Phaser.Geom.Circle(this.x, this.y, 150), time/1000, this.drones[0]);
-    Phaser.Geom.Circle.CircumferencePoint(new Phaser.Geom.Circle(this.x, this.y, 150), time/1000 + 2.1, this.drones[1]);
-    Phaser.Geom.Circle.CircumferencePoint(new Phaser.Geom.Circle(this.x, this.y, 150), time/1000 + 4.20, this.drones[2]);
 
   }
 
@@ -52,8 +51,8 @@ export class Player extends Entity {
     this.ship = this.scene.add.sprite(0, 0, 'player');
 
     this.guns = [];
-    this.guns.push(this.scene.add.sprite(-36, 20, 'shot1_asset'));
-    this.guns.push(this.scene.add.sprite(40, 20, 'shot1_asset'));
+    this.guns.push(this.scene.physics.add.sprite(-36, 20, 'shot1_asset'));
+    this.guns.push(this.scene.physics.add.sprite(40, 20, 'shot1_asset'));
     this.guns[0].setAngle(-90);
     this.guns[1].setAngle(-90);
 
@@ -133,12 +132,10 @@ export class Player extends Entity {
       }, this.getSpeed(pointer));
   }
 
-  // temporary, need to fix real coordinates
   shot(pointer) {
-    console.log(this.droneCircle);
-    for (const gun of this.guns) {
 
-      const shot = new Shot({ scene: this.scene, x: gun.x + this.x, y: gun.y + this.y }, {
+    for (const gun of this.guns) {
+      const shot = new Shot({ scene: this.scene, x: gun.body.center.x, y: gun.body.center.y }, {
         image: 'shot1_asset',
         speed: 1000,
         angle: this.angle - 90,
@@ -150,10 +147,28 @@ export class Player extends Entity {
         ]
       });
     }
+
+    // this.drones.iterate((child) => {
+    //   console.log(child)
+    //   const shot = new Shot({ scene: this.scene, x: child.body.center.x, y: child.body.center.y}, {
+    //     image: 'shot1_asset',
+    //     speed: 1000,
+    //     angle: this.angle - 90,
+    //     animationIn: [
+    //       'shot1_1',
+    //       'shot1_2',
+    //       'shot1_3',
+    //       'shot1_4'
+    //     ]
+    //   });
+    // });
   }
 
   updateDrones(time, delta) {
-
+    this.drones.body.setVelocity(this.body.velocity.x, this.body.velocity.y);
+    this.drones.setAngle(time/30);
+    this.drones.iterate((child) =>{
+      // console.log(child.body.center)
+    })
   }
 }
-
