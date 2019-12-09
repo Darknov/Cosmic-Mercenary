@@ -30,7 +30,7 @@ export class Shot extends Entity {
       this.scene.anims.create({
         key: `${image}_animationIn`,
         frames: inFrames,
-        frameRate: 60,
+        frameRate: 30,
         repeat: 0
       });
     }
@@ -45,7 +45,7 @@ export class Shot extends Entity {
         key: `${image}_animationIn`,
         frames: outFrames,
         frameRate: 10,
-        repeat: 1
+        repeat: 0
       });
     }
 

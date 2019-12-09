@@ -136,32 +136,36 @@ export class Player extends Entity {
 
     for (const gun of this.guns) {
       const shot = new Shot({ scene: this.scene, x: gun.body.center.x, y: gun.body.center.y }, {
-        image: 'shot1_asset',
+        image: 'Shot3_asset',
         speed: 1000,
         angle: this.angle - 90,
         animationIn: [
-          'shot1_1',
-          'shot1_2',
-          'shot1_3',
-          'shot1_4'
+          'Shot3_1',
+          'Shot3_2',
+          'Shot3_3',
+          'Shot3_4',
+          'Shot3_5',
+          'Shot3_6'
         ]
       });
     }
 
-    // this.drones.iterate((child) => {
-    //   console.log(child)
-    //   const shot = new Shot({ scene: this.scene, x: child.body.center.x, y: child.body.center.y}, {
-    //     image: 'shot1_asset',
-    //     speed: 1000,
-    //     angle: this.angle - 90,
-    //     animationIn: [
-    //       'shot1_1',
-    //       'shot1_2',
-    //       'shot1_3',
-    //       'shot1_4'
-    //     ]
-    //   });
-    // });
+    this.drones.iterate((child) => {
+      console.log(child)
+      const shot = new Shot({ scene: this.scene, x: child.body.center.x, y: child.body.center.y}, {
+        image: 'shot2_asset',
+        speed: 1000,
+        angle: this.angle - 90,
+        animationIn: [
+          'shot2_1',
+          'shot2_2',
+          'shot2_3',
+          'shot2_4',
+          'shot2_5',
+          'shot2_6'
+        ]
+      });
+    });
   }
 
   updateDrones(time, delta) {
