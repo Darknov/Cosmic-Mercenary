@@ -6,11 +6,13 @@ export class Shot extends Entity {
     super(config)
     this.setProperties({ ...config, ...shotConfig });
     this.buildContainerComponents({ ...shotConfig });
+    this.image = shotConfig.image;
   }
 
   setProperties({ x, y, angle = 0, speed = 0 }) {
     this.x = x;
     this.y = y;
+    this.existedFor = 0;
     this.setAngle(angle);
     this.scene.physics.velocityFromRotation(
       Phaser.Math.DegToRad(angle),
@@ -26,26 +28,29 @@ export class Shot extends Entity {
       for (const frame of animationIn) {
         inFrames.push({ key: frame });
       }
-      inFrames.push({ key: image});
+      inFrames.push({ key: image });
       this.scene.anims.create({
         key: `${image}_animationIn`,
         frames: inFrames,
-        frameRate: 30,
+        frameRate: 20,
         repeat: 0
       });
     }
 
-    if (!this.scene.anims.exists(`${image}animationOut`)) {
+    if (!this.scene.anims.exists(`${image}_animationOut`)) {
       const outFrames = [];
       for (const frame of animationOut) {
         outFrames.push({ key: frame });
       }
 
       this.scene.anims.create({
-        key: `${image}_animationIn`,
+        key: `${image}_animationOut`,
         frames: outFrames,
-        frameRate: 10,
+        frameRate: 20,
         repeat: 0
+      }).on('complete', (currentAnim, currentFrame, sprite) => {
+        sprite.destroy();
+        this.destroy();
       });
     }
 
@@ -54,5 +59,13 @@ export class Shot extends Entity {
     this.add(shot);
   }
 
-
+  update(time, delta) {
+    this.existedFor += delta;
+    if (this.existedFor > 3000) {
+      this.existedFor = 0;
+      this.iterate(shot => {
+        shot.play(`${this.image}_animationOut`)
+      });
+    }
+  }
 }

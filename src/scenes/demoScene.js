@@ -17,7 +17,10 @@ export class DemoScene extends Phaser.Scene {
   }
 
   create() {
-    this.gameObjects = [];
+    this.physics.world.setBounds(-width / 2, -height / 2, width, height);
+    this.gameObjects = this.add.group({
+      runChildUpdate: true,
+    });
 
     setBackground.call(this);
 
@@ -26,9 +29,7 @@ export class DemoScene extends Phaser.Scene {
   }
 
   update(time, delta) {
-    for (const gameObject of this.gameObjects) {
-      gameObject.update(time, delta);
-    }
+
   }
 }
 

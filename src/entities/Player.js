@@ -137,7 +137,7 @@ export class Player extends Entity {
     for (const gun of this.guns) {
       const shot = new Shot({ scene: this.scene, x: gun.body.center.x, y: gun.body.center.y }, {
         image: 'Shot3_asset',
-        speed: 1000,
+        speed: 1400,
         angle: this.angle - 90,
         animationIn: [
           'Shot3_1',
@@ -146,15 +146,23 @@ export class Player extends Entity {
           'Shot3_4',
           'Shot3_5',
           'Shot3_6'
+        ],
+        animationOut: [
+          'Shot3_exp1',
+          'Shot3_exp2',
+          'Shot3_exp3',
+          'Shot3_exp4',
+          'Shot3_exp5',
+          'Shot3_exp6',
+          'Shot3_exp7'
         ]
       });
     }
 
     this.drones.iterate((child) => {
-      console.log(child)
-      const shot = new Shot({ scene: this.scene, x: child.body.center.x, y: child.body.center.y}, {
+      const shot = new Shot({ scene: this.scene, x: child.body.center.x, y: child.body.center.y }, {
         image: 'shot2_asset',
-        speed: 1000,
+        speed: 700,
         angle: this.angle - 90,
         animationIn: [
           'shot2_1',
@@ -163,6 +171,14 @@ export class Player extends Entity {
           'shot2_4',
           'shot2_5',
           'shot2_6'
+        ],
+        animationOut: [
+          'shot2_exp1',
+          'shot2_exp2',
+          'shot2_exp3',
+          'shot2_exp4',
+          'shot2_exp5',
+          'shot2_exp6'
         ]
       });
     });
@@ -170,9 +186,9 @@ export class Player extends Entity {
 
   updateDrones(time, delta) {
     this.drones.body.setVelocity(this.body.velocity.x, this.body.velocity.y);
-    this.drones.setAngle(time/30);
-    this.drones.iterate((child) =>{
+    this.drones.setAngle(time / 30);
+    this.drones.iterate((child) => {
       // console.log(child.body.center)
-    })
+    });
   }
 }

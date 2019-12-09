@@ -11,6 +11,6 @@ export class Entity extends Phaser.GameObjects.Container {
     super(config.scene, config.x, config.y, []);
     config.scene.add.existing(this);
     config.scene.physics.add.existing(this);
-    this.scene.gameObjects.push(this);
+    this.scene.gameObjects.add(this);
   }
 }
